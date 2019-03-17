@@ -5,23 +5,17 @@ console.log('decorators. task 2\n'.toUpperCase());
 // ‘admin’ или ‘user’ данную строку нужно передать в декоратор при вызове. Сам класс
 // и имя декоратора может быть произвольным.
 
-function UserType() {
+function UserType(type: string) {
     return function (targetClass) {
         return class {
-            public type: string;
+            public type: string = type;
             public createDate: string = new Date().toLocaleString();
-
-            constructor (type: string) {
-                this.type = type;
-            }
         }
     }
 }
 
-@UserType()
-class User {
-    constructor(...properties: any[]) {}
-}
+@UserType('admin')
+class User {}
 
-const user = new User('admin');
+const user = new User();
 console.log(user);
